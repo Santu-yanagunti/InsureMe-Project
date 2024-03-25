@@ -25,24 +25,24 @@ pipeline {
             }
     }
    stage('Create Docker Image') {
-      steps {
+    steps {
         echo 'Create a Docker Image'
         sh 'docker build -t santuyanagunti/apr-insure-project:1.0 .'
-            }
-    }
-     stage('Docker Login') {
-      steps {
-        echo 'Docker Login'
-        withCredentials([usernamePassword(credentialsId: 'Dockerlogin', passwordVariable: 'dockerhub-pass', usernameVariable: 'dockerhub-user')]) {
-        sh 'docker login -u ${env.dockerhub-user} -p ${env.dockerhub-pass}'
-                    }
-             }
-    }
-     stage('Push Docker Image') {
-      steps {
-        echo 'Push a Docker Image'
-        sh 'docker push santuyanagunti/apr-insure-project:1.0 .'
-                   }
-            }
     }
 }
+    stage('Docker Login') {
+    steps {
+        echo 'Docker Login'
+        withCredentials([usernamePassword(credentialsId: 'Dockerlogin', passwordVariable: 'dockerhub-pass', usernameVariable: 'dockerhub-user')]) {
+            sh "docker login -u ${env.dockerhub-user} -p ${env.dockerhub-pass}"
+        }
+    }
+}
+    stage('Push Docker Image') {
+    steps {
+        echo 'Push a Docker Image'
+        sh 'docker push santuyanagunti/apr-insure-project:1.0'
+              }
+           }                
+       }
+   }

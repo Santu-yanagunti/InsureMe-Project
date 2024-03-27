@@ -36,9 +36,8 @@ pipeline {
     stage('Push the Docker image') {
       steps {
         sh 'docker push santuyanagunti/insure-me-app:1.0'
-                                }
             }
-         }
-     }
-}
- 
+                                   }
+                               }
+            }
+        }
